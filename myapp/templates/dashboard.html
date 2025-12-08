@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seeker Skill Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #121212;
+            color: white;
+            display: flex;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #1c1c1c;
+            padding: 20px;
+            position: fixed;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            color: #f9a825;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 12px 15px;
+            margin: 8px 0;
+            color: #ddd;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #f9a825;
+            color: #111;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 260px;
+            padding: 30px;
+            width: calc(100% - 260px);
+        }
+
+        /* HEADER */
+        .dashboard-header {
+            background: #1c1c1c;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 12px rgba(255, 193, 7, 0.2);
+        }
+
+        .dashboard-header h1 {
+            color: #f9a825;
+            margin: 0;
+        }
+
+        /* PROFILE BOX */
+        .profile-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-box img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid #f9a825;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f9a825;
+        }
+
+        .logout-btn {
+            background: #f9a825;
+            padding: 8px 15px;
+            color: #111;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-left: 10px;
+        }
+
+        .logout-btn:hover {
+            background: #ffcc33;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+        }
+
+        /* DASHBOARD CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #1c1c1c;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 18px rgba(255, 215, 0, 0.25);
+        }
+
+        .card h3 {
+            color: #f4c542;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Seeker Skill</h2>
+        <a href="#">Dashboard</a>
+        <a href="#">My Courses</a>
+        <a href="#">Assignments</a>
+        <a href="#">Certificates</a>
+        <a href="#">Profile</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <h1>Welcome, <span id="displayName">{{ request.user.username }}</span></h1>
+
+            <div class="profile-box">
+                {% if request.user.studentprofile.profile_image %}
+                <img src="{{ request.user.studentprofile.profile_image.url }}" alt="Profile Image">
+                {% else %}
+                <img src="/media/default.png" alt="Profile Image">
+                {% endif %}
+
+                <span class="profile-name" id="profileName">{{ request.user.username }}</span>
+
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="logout-btn">Logout</button>
+                </form>
+            </div>
+        </div>
+
+
+
+        <!-- Dashboard Cards -->
+        <div class="cards">
+            <div class="card">
+                <h3>Total Courses</h3>
+                <p>12 Enrolled</p>
+            </div>
+
+            <div class="card">
+                <h3>Completed</h3>
+                <p>8 Courses</p>
+            </div>
+
+            <div class="card">
+                <h3>Certificates</h3>
+                <p>4 Earned</p>
+            </div>
+
+            <div class="card">
+                <h3>Upcoming Classes</h3>
+                <p>3 Scheduled</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

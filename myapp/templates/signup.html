@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Seeker Skill - Sign Up</title>
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+            /* Page background */
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                background: #f4f4f4;
+            }
+
+            /* Main container */
+            .container {
+                width: 400px;
+                margin: 40px auto;
+                background: #210303;
+                padding: 25px;
+                border-radius: 10px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Logo at top */
+            .logo {
+                display: block;
+                margin: 0 auto 10px;
+                width: 120px;
+                height: auto;
+                border-radius: 50%;
+            }
+
+            /* Heading */
+            h2 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #333;
+                line-height: 1.4;
+            }
+
+            /* Form elements */
+            form label {
+                font-weight: bold;
+                display: block;
+                margin: 10px 0 5px;
+            }
+
+            form input,
+            form select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                margin-bottom: 12px;
+                font-size: 14px;
+            }
+
+            /* Submit button */
+            button {
+                width: 100%;
+                padding: 12px;
+                background-color: #f9a825;
+                color: #fff;
+                font-size: 16px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            button:hover {
+                background-color: #d68f20;
+            }
+
+            /* Login link */
+            p a {
+                color: #f9a825;
+                font-weight: bold;
+            }
+        </style>
+</head>
+
+<body>
+    {% load static %}
+    <div class="container">
+        <img src="{% static 'seekerskill.jpg' %}" class="logo" alt="Institute Logo">
+
+        <h2>Seeker Skill<br>Sign-Up</h2>
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label>Profile Image</label>
+            <input type="file" name="profile_image" accept="image/*" required>
+
+            <label>Username</label>
+            <input type="text" name="username" required>
+
+            <label>Date of Birth</label>
+            <input type="date" name="dob" required>
+
+            <label>Gender</label>
+            <select name="gender" required>
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+
+            <label>Email Address</label>
+            <input type="email" name="email" required>
+
+            <label>Password</label>
+            <input type="password" name="password" required>
+
+            <label>Confirm Password</label>
+            <input type="password" name="confirm_password" required>
+
+            <button type="submit">Create Account</button>
+        </form>
+
+
+        <!-- Login link -->
+        <p style="text-align: center; margin-top: 15px;">
+            Already have an account?
+            <a href="{% url 'login' %}" style="color: #f9a825; text-decoration: underline;">Login here</a>
+        </p>
+
+
+    </div>
+</body>
+
+</html>

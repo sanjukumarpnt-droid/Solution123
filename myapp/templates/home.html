@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seeker Skill Navbar</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #121212;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            width: auto;
+            background: #1c1c1c;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        /* LOGO */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 45px;
+            width: 45px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #f9a825;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(255, 193, 7, 0.4);
+        }
+
+        /* NAV LINKS */
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ddd;
+            font-size: 16px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #f9a825;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            background: #f9a825;
+            left: 0;
+            bottom: -3px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* BUTTON */
+        .cta-btn {
+            padding: 10px 18px;
+            background: linear-gradient(45deg, #f9a825, #ffcc33);
+            border-radius: 6px;
+            color: #222;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+        }
+
+        /* MAIN CONTENT */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 50px 20px;
+            gap: 40px;
+        }
+
+        .image-box {
+            flex: 1 1 450px;
+            max-width: 500px;
+        }
+
+        .image-box img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
+        }
+
+        .content-box {
+            color: #ddd;
+            flex: 1 1 500px;
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+        }
+
+        .content-box h1 {
+            font-size: 36px;
+            color: #f4c542;
+            margin-bottom: 10px;
+        }
+
+        .content-box h2 {
+            font-size: 22px;
+            color: #f4c542;
+            margin-top: 20px;
+        }
+
+        .content-box p {
+            font-size: 15px;
+            line-height: 1.7;
+            margin-top: 10px;
+        }
+
+        /* SLIDER */
+        .slider-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 40px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .fade {
+            animation: fadeEffect 1.5s ease-in-out;
+        }
+
+        @keyframes fadeEffect {
+            from {
+                opacity: 0.4;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            padding: 14px;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.35);
+            user-select: none;
+            transform: translateY(-50%);
+            transition: 0.3s;
+        }
+
+        .prev {
+            left: 15px;
+        }
+
+        .next {
+            right: 15px;
+        }
+
+        .prev:hover,
+        .next:hover {
+            background: rgba(249, 168, 37, 0.8);
+        }
+
+        /* SECTION STYLE */
+        section {
+            padding: 40px 20px;
+            background: rgb(97, 116, 208);
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgb(175, 184, 53);
+            max-width: 1200px;
+        }
+
+        #courses .courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        /* CONTACT */
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-box {
+            background: #1e2238;
+            padding: 25px;
+            border-radius: 10px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+
+        .contact-box h3 {
+            color: #f4c542;
+            margin: 10px 0 5px;
+        }
+
+        .contact-box p {
+            color: #ddd;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #ccc;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'seekerskill.jpg' %}" alt="Seeker Skill Logo">
+            <div class="logo-text">Seeker Skill</div>
+        </div>
+
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Courses</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <a href="signup" class="cta-btn">Sign Up</a>
+    </nav>
+
+    <!-- SLIDER -->
+    <div class="slider-container">
+        <div class="slide fade">
+            <img src="{% static 'homeimg.png' %}" alt="Slide 1">
+        </div>
+
+        <div class="slide fade">
+            <img src="{% static 'homeimg2.png' %}" alt="Slide 2">
+        </div>
+
+        <div class="slide fade">
+            <img src="{% static 'homeimg1.png' %}" alt="Slide 3">
+        </div>
+
+        <div class="slide fade">
+            <img src="{% static 'homeimg3.png' %}" alt="Slide 4">
+        </div>
+
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+    </div>
+
+    <!-- HOME SECTION -->
+    <section class="container">
+        <div class="image-box">
+            <img src="{% static 'seekerhome.png' %}" alt="Seeker Skill Banner">
+        </div>
+
+        <div class="content-box">
+            <h1>Welcome to Seeker Skill Pvt. Ltd.</h1>
+            <p>Seeker Skill Pvt. Ltd. is a trusted name in skill development ... (content unchanged)</p>
+
+            <h2>What We Do</h2>
+            <p>We go beyond classroom learning ...</p>
+
+            <h2>Social Responsibility</h2>
+            <p>At Seeker Skill, we believe in giving back ...</p>
+
+            <div class="stats">
+                <p><strong>5000+</strong> learners trained.</p>
+                <p><strong>100+</strong> college programs.</p>
+                <p><strong>25,000+</strong> students empowered.</p>
+                <p><strong>Lifetime support</strong> for every student.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COURSES SECTION -->
+    <section id="courses">
+        <h2>All Computer Courses</h2>
+
+        <div class="courses">
+            <div class="course"><h3>Computer Basics</h3><p>Learn fundamentals.</p></div>
+            <div class="course"><h3>MS Office</h3><p>Word, Excel, PPT.</p></div>
+            <div class="course"><h3>HTML & CSS</h3><p>Create websites.</p></div>
+            <div class="course"><h3>JavaScript</h3><p>Make dynamic pages.</p></div>
+            <div class="course"><h3>Python</h3><p>Programming basics.</p></div>
+            <!-- Continue your items -->
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+
+        <div class="contact-container">
+
+            <div class="contact-box">
+                <h3>Email</h3>
+                <p>info@seekerskill.com</p>
+            </div>
+
+            <div class="contact-box">
+                <h3>Phone</h3>
+                <p>+917536009378 / 7536009370</p>
+            </div>
+
+            <div class="contact-box">
+                <h3>Address</h3>
+                <p>A-181/1, Near Bank Of Baroda, Avas Vikas, Rudrapur</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>Copyright © 2025 All rights reserved. Designed by DITRP INDIA.</p>
+    </footer>
+
+    <!-- SLIDER SCRIPT -->
+    <script>
+        let slideIndex = 0;
+        autoSlide();
+
+        function autoSlide() {
+            let slides = document.getElementsByClassName("slide");
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            slideIndex++;
+
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+
+            setTimeout(autoSlide, 3000);
+        }
+    </script>
+
+</body>
+
+</html>
