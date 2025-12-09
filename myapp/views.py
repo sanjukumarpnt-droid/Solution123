@@ -93,8 +93,13 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect("login")
+
+
+
 def abcd():
-    pass
+    a = 5
+    b= 6
+    print(a+b)
 
 
 
