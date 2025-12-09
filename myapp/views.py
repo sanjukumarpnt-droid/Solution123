@@ -95,14 +95,6 @@ def logout_user(request):
     return redirect("login")
 
 
-
-def abcd():
-    a = 5
-    b= 6
-    print(a+b)
-
-
-
 # ---------------- FORGET PASSWORD ----------------
 def forget_password(request):
     if request.method == "POST":
