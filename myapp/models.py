@@ -66,9 +66,4 @@ class User(AbstractBaseUser, PermissionsMixin):
 # ---------------- PROFILE MODEL ----------------
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    dob = models.DateField()
-    gender = models.CharField(max_length=20)
-    profile_image = models.ImageField(upload_to='mysite/profile_images/')
-    
-    def __str__(self):
-        return self.user.username
+    profile_image = models.ImageField(upload_to='profile_images/', default='default.png')
